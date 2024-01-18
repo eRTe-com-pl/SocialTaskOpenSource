@@ -26,13 +26,26 @@ import { useRef, useState, useEffect } from "react";
     }
   }, []); // Pusta tablica dependencies oznacza, że useEffect zostanie wykonany tylko raz po pierwszym renderowaniu
 
+  useEffect(() => {
+    // Dodaj kod do obsługi automatycznego obrotu po utworzeniu komponentu Globe
+    if (globeEl.current) {
+      // Skorzystaj z dostępu do API Globe poprzez ref
+      globeEl.current.controls().autoRotate = true;
+      globeEl.current.controls().autoRotateSpeed = 0.5;
+    }
+  }, [globeEl]); // Wstawienie globeEl jako zależności, aby useEffect zadziałał po załadowaniu komponentu Globe
+
 
   return (
     <div className="App">
       <button
         onClick={() => {
-          if (userLocation) {
-            globeEl.current.pointOfView(userLocation, 20000);
+          if (userLocation && globeEl.current) {
+            try {
+              globeEl.current.pointOfView(userLocation, 20000);
+            } catch (error) {
+              console.error("Błąd podczas ustawiania punktu widzenia:", error.message);
+            }
           }
         }}
       >
