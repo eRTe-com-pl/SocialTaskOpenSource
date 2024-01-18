@@ -7,15 +7,36 @@ import { useRef, useState, useEffect } from "react";
   
   function App() {
   const globeEl = useRef();
+  const [userLocation, setUserLocation] = useState(null);
+
+  useEffect(() => {
+    // Pobierz geolokalizację użytkownika przy pierwszym renderowaniu komponentu
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation({ lat: latitude, lng: longitude });
+        },
+        (error) => {
+          console.error("Błąd pobierania geolokalizacji:", error.message);
+        }
+      );
+    } else {
+      console.error("Twoja przeglądarka nie obsługuje Geolocation API.");
+    }
+  }, []); // Pusta tablica dependencies oznacza, że useEffect zostanie wykonany tylko raz po pierwszym renderowaniu
+
+
   return (
     <div className="App">
       <button
         onClick={() => {
-          globeEl.current.pointOfView({ lat: 0, lng: -500 }, 20000);
-          // globeEl.current.pointOfView({ lat: 0, lng: 170 }, 10000);
+          if (userLocation) {
+            globeEl.current.pointOfView(userLocation, 20000);
+          }
         }}
       >
-        test
+        Przejdź do mojej lokalizacji
       </button>
       <Globe
         pointOfView
