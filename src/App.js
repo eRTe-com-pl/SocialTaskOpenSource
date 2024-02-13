@@ -3,14 +3,16 @@ import './App.css';
 import places from './assets/places';
 import arcsData from './assets/data';
 import { useRef, useState, useEffect } from "react";
-// export default function App() {
-  
-  function App() {
+
+const AUTO_ROTATE_SPEED = 0.5;
+const POV_POSITION_TIME = 20000;
+const LABEL_COLOR = "rgba(255, 165, 0, 0.75)";
+
+function App() {
   const globeEl = useRef();
   const [userLocation, setUserLocation] = useState(null);
 
   useEffect(() => {
-    // Pobierz geolokalizację użytkownika przy pierwszym renderowaniu komponentu
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -18,39 +20,39 @@ import { useRef, useState, useEffect } from "react";
           setUserLocation({ lat: latitude, lng: longitude });
         },
         (error) => {
-          console.error("Błąd pobierania geolokalizacji:", error.message);
+          console.error("Error while getting geolocation:", error);
         }
       );
     } else {
-      console.error("Twoja przeglądarka nie obsługuje Geolocation API.");
+      console.error("Your browser doesn't support Geolocation API.");
     }
-  }, []); // Pusta tablica dependencies oznacza, że useEffect zostanie wykonany tylko raz po pierwszym renderowaniu
+  }, []);
 
   useEffect(() => {
-    // Dodaj kod do obsługi automatycznego obrotu po utworzeniu komponentu Globe
     if (globeEl.current) {
-      // Skorzystaj z dostępu do API Globe poprzez ref
       globeEl.current.controls().autoRotate = true;
-      globeEl.current.controls().autoRotateSpeed = 0.5;
+      globeEl.current.controls().autoRotateSpeed = AUTO_ROTATE_SPEED;
     }
-  }, [globeEl]); // Wstawienie globeEl jako zależności, aby useEffect zadziałał po załadowaniu komponentu Globe
-
+  }, []);
 
   return (
     <div className="App">
-      <button
-        onClick={() => {
-          if (userLocation && globeEl.current) {
-            try {
-              globeEl.current.pointOfView(userLocation, 20000);
-            } catch (error) {
-              console.error("Błąd podczas ustawiania punktu widzenia:", error.message);
+      <div className="control-panel">
+        <button>Join to</button>
+        <button
+          onClick={() => {
+            if (userLocation && globeEl.current) {
+              try {
+                globeEl.current.pointOfView(userLocation, POV_POSITION_TIME);
+              } catch (error) {
+                console.error("Error during setting point of view:", error);
+              }
             }
-          }
-        }}
-      >
-        Przejdź do mojej lokalizacji
-      </button>
+          }}
+        >
+          Go to my location
+        </button>
+      </div>
       <Globe
         pointOfView
         ref={globeEl}
