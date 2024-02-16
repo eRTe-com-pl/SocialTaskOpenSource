@@ -6,7 +6,7 @@ import { useRef, useState, useEffect } from "react";
 
 const AUTO_ROTATE_SPEED = 0.5;
 const POV_POSITION_TIME = 20000;
-const LABEL_COLOR = "rgba(255, 165, 0, 0.75)";
+// const LABEL_COLOR = "rgba(255, 165, 0, 0.75)";
 
 function App() {
   const globeEl = useRef();
