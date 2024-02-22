@@ -1,6 +1,6 @@
 import Globe from "react-globe.gl";
 import './App.css';
-import places from './assets/places';
+import placesData from './assets/places';
 import arcsData from './assets/data';
 import { useRef, useState, useEffect } from "react";
 
@@ -11,6 +11,7 @@ const POV_POSITION_TIME = 20000;
 function App() {
   const globeEl = useRef();
   const [userLocation, setUserLocation] = useState(null);
+  const [places, setPlaces ] = useState(placesData);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -25,6 +26,7 @@ function App() {
       );
     } else {
       console.error("Your browser doesn't support Geolocation API.");
+      
     }
   }, []);
 
@@ -35,15 +37,28 @@ function App() {
     }
   }, []);
 
+const handleJoin = () =>{
+  if(userLocation){
+    const newPlace = {
+      name: "You",
+      lat: userLocation.lat,
+      lng: userLocation.lng,
+      size: 1
+  }
+  setPlaces ([...places, newPlace]);
+}
+
   return (
     <div className="App">
       <div className="control-panel">
-        <button>Join to</button>
+        <button onClick={handleJoin}>Join to</button>
         <button
           onClick={() => {
             if (userLocation && globeEl.current) {
               try {
                 globeEl.current.pointOfView(userLocation, POV_POSITION_TIME);
+              //   @RTODO Add point to data
+              //   @RTODO send point to socket
               } catch (error) {
                 console.error("Error during setting point of view:", error);
               }
