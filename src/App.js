@@ -3,11 +3,14 @@ import './App.css';
 import placesData from './assets/places';
 import arcsData from './assets/data';
 import { useRef, useState, useEffect } from "react";
+import { io } from "socket.io-client";
+import { Socket } from "socket.io";
 
 const AUTO_ROTATE_SPEED = 0.5;
 const POV_POSITION_TIME = 20000;
 // const LABEL_COLOR = "rgba(255, 165, 0, 0.75)";
-
+const socket = io('http://localhost:3000');
+ 
 function App() {
   const globeEl = useRef();
   const [userLocation, setUserLocation] = useState(null);
@@ -46,6 +49,7 @@ const handleJoin = () =>{
       size: 1
   }
   setPlaces ([...places, newPlace]);
+  sock
 }
 
   return (
@@ -57,8 +61,6 @@ const handleJoin = () =>{
             if (userLocation && globeEl.current) {
               try {
                 globeEl.current.pointOfView(userLocation, POV_POSITION_TIME);
-              //   @RTODO Add point to data
-              //   @RTODO send point to socket
               } catch (error) {
                 console.error("Error during setting point of view:", error);
               }
