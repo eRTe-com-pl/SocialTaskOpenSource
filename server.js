@@ -1,37 +1,27 @@
-const express = require('express');
-const http = require('http');
-const socketIo = require('socket.io');
+import express from 'express';
+import http from 'http';
+import places from './src/data/places.js';
+import { Server as socketIoModule } from 'socket.io';
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = new socketIoModule(server);
 
-const PORT = 3001;
+const PORT = 3000;
 
-// Tablica przechowująca promienie
-let radii = [];
+server.listen(PORT, () => {
+  console.log(`Serwer działa na porcie ${PORT}`);
+});
 
-// Obsługa połączenia klienta
 io.on('connection', socket => {
   console.log('Nowy klient połączony');
 
-  // Obsługa otrzymywania geolokalizacji od klienta
-  socket.on('userGeolocation', userGeolocation => {
-    // Tutaj możesz przetworzyć otrzymaną geolokalizację
-    // i dodać nowy promień do tablicy radii
-    radii.push(userGeolocation);
-
-    // Aktualizuj wszystkich klientów z nowymi promieniami
-    io.emit('radiiUpdate', radii);
+  socket.on('newPlace', newPlace => {
+    places.push(newPlace);
+    io.emit('placesData', placesData);
   });
 
-  // Obsługa rozłączenia klienta
   socket.on('disconnect', () => {
     console.log('Klient rozłączony');
   });
-});
-
-// Uruchomienie serwera
-server.listen(PORT, () => {
-  console.log(`Serwer działa na porcie ${PORT}`);
 });
