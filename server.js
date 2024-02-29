@@ -26,7 +26,7 @@ io.on('connection', socket => {
   socket.on('newPlace', newPlace => {
     console.log('Nowe miejsce:', newPlace);
     places.push({id: socket.id, place : newPlace});
-    console.log('Aktualne miejsca:', places);
+    //check if newPlace just exist
     io.emit('placesData', places.map(place => place.place));
   });
 

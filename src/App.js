@@ -55,8 +55,10 @@ function App() {
     }
   }
 
+  //napisz nu useefect
   useEffect(() => {
     socket.on('placesData', (updatedPlaces) => {
+      console.log(updatedPlaces)
       setPlaces(updatedPlaces);
     });
 
@@ -68,6 +70,7 @@ function App() {
 
   return (
     <div className="App">
+
       <div className="control-panel">
         <button onClick={handleJoin}>Join to</button>
         <button
