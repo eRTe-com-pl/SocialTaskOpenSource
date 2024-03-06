@@ -7,7 +7,7 @@ import { useRef, useState, useEffect } from "react";
 import { io } from "socket.io-client";
 // import { Socket } from "socket.io";
 
-const AUTO_ROTATE_SPEED = 0.001; // 0.5
+const AUTO_ROTATE_SPEED = 0.5;
 const POV_POSITION_TIME = 20000;
 // const LABEL_COLOR = "rgba(255, 165, 0, 0.75)";
 const socket = io("http://localhost:3001");
