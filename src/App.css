@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+
+.Error {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  z-index: 100;
+}
+
+.Error-Content {
+  margin-top: 50px;
+  color: white;
+}
+
+.Button {
+  cursor: pointer;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 10px;
+  border: 0;
+}
+
+.Button.Secondary {
+  background-color: #dff2ff;
+  color: #363636;
+}
+
+.Button.Primary {
+  background-color: #6effb6;
+  color: #064926;
+}
