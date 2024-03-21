@@ -18,7 +18,7 @@ function App() {
   const [userLocation, setUserLocation] = useState(null);
   const [places, setPlaces] = useState(placesData);
   const [joined, setJoined] = useState(false);
-
+  const [error, setError] = useState(false);
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -28,6 +28,7 @@ function App() {
           setUserLocation({ lat: latitude, lng: longitude });
         },
         (error) => {
+          setError(true);
           console.error("Error while getting geolocation:", error);
         }
       );
@@ -86,6 +87,23 @@ function App() {
 
   return (
     <div className="App">
+      {error && (
+        <div className="Error">
+          <div className="Error-Content">
+            <h1>Error while fetching location</h1>
+            <p>An error occurred while retrieving the location. Try refreshing the page.</p>
+            <div>
+              <button className="Button Primary" onClick={() => window.location.reload()}>
+                Refresh
+              </button>
+              <button className="Button Secondary" onClick={() => setError(false)}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="control-panel">
         <button onClick={handleJoin}>Join to</button>
         <button
