@@ -7,6 +7,7 @@ import {useRef, useState, useEffect} from "react";
 import {io} from "socket.io-client";
 import  ErrorMessage from "./components/ErrorMessage.js";
 import GlobeComponent from "./components/GlobeComponent.js";
+import ControlPanel from "./components/ControlPanel.js";
 
 const AUTO_ROTATE_SPEED = 0.5;
 const POV_POSITION_TIME = 20000;
@@ -87,10 +88,10 @@ function App() {
     return (
         <div className="App">
             {error && (<ErrorMessage errorTitle="Error" errorMessage={errorMessage} setError={setError}/>)}
-
+            <ControlPanel handleJoin={handleJoin} globeElement={globeEl} />
             <div className="control-panel">
                 <button onClick={handleJoin}>Join to</button>
-                <button
+                {/* <button
                     onClick={() => {
                         if (userLocation && globeEl.current) {
                             try {
@@ -100,9 +101,9 @@ function App() {
                             }
                         }
                     }}
-                >
-                    Go to my location
-                </button>
+                    >
+                    Go to my locationssss
+                </button> */}
             </div>
             <GlobeComponent places={places} globeEl={globeEl} />
         </div>

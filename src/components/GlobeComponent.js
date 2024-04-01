@@ -8,10 +8,10 @@ const POV_POSITION_TIME = 20000;
 function GlobeComponent({ places, globeEl }) {
     const globeRef = useRef();
 
-    useEffect(() => {
-        if (globeRef.current) {
-            globeRef.current.controls().autoRotate = true;
-            globeRef.current.controls().autoRotateSpeed = AUTO_ROTATE_SPEED;
+   useEffect(() => {
+        if (globeEl.current) {
+            globeEl.current.controls().autoRotate = true;
+            globeEl.current .controls().autoRotateSpeed = AUTO_ROTATE_SPEED;
         }
     }, []);
 
