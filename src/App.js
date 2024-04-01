@@ -39,13 +39,6 @@ function App() {
         }
     }, []);
 
-    useEffect(() => {
-        if (globeEl.current) {
-            globeEl.current.controls().autoRotate = true;
-            globeEl.current.controls().autoRotateSpeed = AUTO_ROTATE_SPEED;
-        }
-    }, []);
-
     const handleJoin = () => {
         // User can join only once
         if (joined) {
