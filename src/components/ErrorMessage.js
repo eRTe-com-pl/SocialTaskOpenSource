@@ -1,26 +1,12 @@
-import React from 'react';
+import React from "react";
 
-
-const ErrorMessage = ({ errorTitle, errorMessage, setError }) => {
-
-    if (!errorMessage) return null;
-
-    return (
-        <div className="Error">
-            <div className="Error-Content">
-                <h1>{errorTitle}</h1>
-                <p>{errorMessage}</p>
-                <div>
-                    <button className="Button Primary" onClick={() => window.location.reload()}>
-                        Refresh
-                    </button>
-                    <button className="Button Secondary" onClick={() => setError(false)}>
-                        Close
-                    </button>
-                </div>
-            </div>
-        </div>
-    )
+function ErrorMessage({ errorTitle, errorMessage }) {
+  return (
+    <div className="error-message">
+      <h2>{errorTitle}</h2>
+      <p>{errorMessage}</p>
+    </div>
+  );
 }
 
 export default ErrorMessage;
