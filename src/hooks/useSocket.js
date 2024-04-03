@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import placesData from "../data/places.js";
-import { useState } from "react";
+import ErrorMessage from "../components/ErrorMessage.js";
 
-const socket = io("<http://localhost:3001>");
+const socket = io("http://localhost:3001");
 
-export function useSocket(userLocation) {
+export function useSocket(userLocation, setErrorMessage) {
   const globeEl = useRef();
   const [places, setPlaces] = useState(placesData);
   const [joined, setJoined] = useState(false);
@@ -15,25 +15,16 @@ export function useSocket(userLocation) {
       socket.emit("getPlaces");
     };
 
-    useEffect(() => {
-      socket.on("connect_error", (error) => {
-        console.error("Error during connection to the server:", error);
-        setErrorMessage("Error during connection to the server: " + error.message);
-        setError(true);
-      });
+    socket.on("connect_error", (error) => {
+      console.error("Error during connection to the server:", error);
+      setErrorMessage("Error during connection to the server: " + error.message);
+    });
 
-      socket.on("placesData", (updatedPlaces) => {
-        setPlaces(updatedPlaces);
-      });
+    socket.on("placesData", (updatedPlaces) => {
+      setPlaces(updatedPlaces);
+    });
 
-      const fetchPlaces = () => {
-        socket.emit("getPlaces");
-      };
-
-      fetchPlaces();
-    }, []);
-
-    return { places, handleJoin, globeEl };
+    fetchPlaces();
 
     return () => {
       socket.off("placesData");
@@ -42,8 +33,7 @@ export function useSocket(userLocation) {
 
   const handleJoin = () => {
     if (joined) {
-      setErrorMessage("You have already joined!");
-      setError(true);
+      setErrorMessage("You have already joined!"); 
       return;
     }
 

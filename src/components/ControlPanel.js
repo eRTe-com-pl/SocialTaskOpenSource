@@ -1,11 +1,11 @@
 import React from "react";
 
 const POV_POSITION_TIME = 20000;
-function ControlPanel({ handleJoin, globeElement }) {
+function ControlPanel({ handleJoin, globeElement, setErrorMessage }) {
+
     return (
         <div
             className="control-panel"
-            style={{ position: "absolute", top: "0", right: "0" }}
         >
             <h1>Control Panel</h1>
             <button

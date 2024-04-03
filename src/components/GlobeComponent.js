@@ -17,7 +17,7 @@ function GlobeComponent({ places, globeEl }) {
 
     return (
         <Globe
-            pointOfView
+            // pointOfView
             ref={globeEl}
             globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
             backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"

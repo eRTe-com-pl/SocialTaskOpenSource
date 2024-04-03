@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // import Globe from "react-globe.gl";
 import "./App.css";
 // import placesData from "./data/places.js";
@@ -17,14 +17,16 @@ import { useSocket } from "./hooks/useSocket.js";
 // const socket = io("http://localhost:3001");
 
 function App() {
-    const {userLocation, errorMessage, error} = useUserLocation();
-    const {places, globeEl, handleJoin} = useSocket(userLocation);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [error, setError] = useState("");
+    const { userLocation } = useUserLocation();
+    const { places, globeEl, handleJoin } = useSocket(userLocation, setErrorMessage);
 
     return (
         <div className="App">
-            {error && (<ErrorMessage errorTitle="Error" errorMessage={errorMessage} />)}
-            <ControlPanel handleJoin={handleJoin} globeElement={globeEl} />
-            <GlobeComponent places={places} globeEl={globeEl} />
+            {errorMessage !== "" && <ErrorMessage errorTitle="Error" errorMessage={errorMessage} />}
+            <ControlPanel handleJoin={handleJoin} globeElement={globeEl} setErrorMessage={setErrorMessage} />
+            <GlobeComponent places={places} globeEl={globeEl} setErrorMessage={setErrorMessage} />
         </div>
     );
 }
