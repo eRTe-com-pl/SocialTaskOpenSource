@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import placesData from "../data/places.js";
+import { useState } from "react";
 
 const socket = io("<http://localhost:3001>");
 
@@ -14,17 +15,25 @@ export function useSocket(userLocation) {
       socket.emit("getPlaces");
     };
 
-    socket.on("connect_error", (error) => {
-      console.error("Error during connection to the server:", error);
-      setErrorMessage("Error during connection to the server: " + error.message);
-      setError(true);
-    });
+    useEffect(() => {
+      socket.on("connect_error", (error) => {
+        console.error("Error during connection to the server:", error);
+        setErrorMessage("Error during connection to the server: " + error.message);
+        setError(true);
+      });
 
-    socket.on("placesData", (updatedPlaces) => {
-      setPlaces(updatedPlaces);
-    });
+      socket.on("placesData", (updatedPlaces) => {
+        setPlaces(updatedPlaces);
+      });
 
-    fetchPlaces();
+      const fetchPlaces = () => {
+        socket.emit("getPlaces");
+      };
+
+      fetchPlaces();
+    }, []);
+
+    return { places, handleJoin, globeEl };
 
     return () => {
       socket.off("placesData");
