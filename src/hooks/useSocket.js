@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import placesData from "../data/places.js";
-import ErrorMessage from "../components/ErrorMessage.js";
 
 const socket = io("http://localhost:3001");
 
-export function useSocket(userLocation, setErrorMessage) {
+export function useSocket(userLocation, errorHandler) {
   const globeEl = useRef();
   const [places, setPlaces] = useState(placesData);
   const [joined, setJoined] = useState(false);
@@ -17,7 +16,7 @@ export function useSocket(userLocation, setErrorMessage) {
 
     socket.on("connect_error", (error) => {
       console.error("Error during connection to the server:", error);
-      setErrorMessage("Error during connection to the server: " + error.message);
+      errorHandler.setError("Error", "Error during connection to the server: " + error.message, false);
     });
 
     socket.on("placesData", (updatedPlaces) => {
@@ -33,7 +32,8 @@ export function useSocket(userLocation, setErrorMessage) {
 
   const handleJoin = () => {
     if (joined) {
-      setErrorMessage("You have already joined!"); 
+      errorHandler.setError("Wait a while...", "You have already joined!", true);
+
       return;
     }
 
@@ -51,5 +51,5 @@ export function useSocket(userLocation, setErrorMessage) {
     }
   };
 
-  return { places, handleJoin, globeEl };
+  return { places, globeEl, handleJoin };
 }

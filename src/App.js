@@ -10,6 +10,7 @@ import GlobeComponent from "./components/GlobeComponent.js";
 import ControlPanel from "./components/ControlPanel.js";
 import { useUserLocation } from "./hooks/useUserLocation.js";
 import { useSocket } from "./hooks/useSocket.js";
+import { useError } from "./hooks/useError.js";
 
 // const AUTO_ROTATE_SPEED = 0.5;
 // const POV_POSITION_TIME = 20000;
@@ -17,18 +18,17 @@ import { useSocket } from "./hooks/useSocket.js";
 // const socket = io("http://localhost:3001");
 
 function App() {
-    const [errorMessage, setErrorMessage] = useState("");
-    const [error, setError] = useState("");
-    const { userLocation } = useUserLocation();
-    const { places, globeEl, handleJoin } = useSocket(userLocation, setErrorMessage);
+  const error = useError();
+  const { userLocation } = useUserLocation();
+  const { places, globeEl, handleJoin } = useSocket(userLocation, error);
 
-    return (
-        <div className="App">
-            {errorMessage !== "" && <ErrorMessage errorTitle="Error" errorMessage={errorMessage} />}
-            <ControlPanel handleJoin={handleJoin} globeElement={globeEl} setErrorMessage={setErrorMessage} />
-            <GlobeComponent places={places} globeEl={globeEl} setErrorMessage={setErrorMessage} />
-        </div>
-    );
+  return (
+    <div className="App">
+      <ErrorMessage error={error} />
+      <ControlPanel handleJoin={handleJoin} globeElement={globeEl} setError={error.setError} />
+      <GlobeComponent places={places} globeEl={globeEl} />
+    </div>
+  );
 }
 
 export default App;
