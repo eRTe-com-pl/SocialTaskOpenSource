@@ -68,3 +68,18 @@
   background-color: #6effb6;
   color: #064926;
 }
+
+.control-panel {
+  position: fixed;
+  top: 50%;
+  left: 50px;
+  transform: translate(0, -50%);
+  z-index: 2;
+  background-color: white;
+  display: flex;
+  width: max-content;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px;
+  border-radius: 10px;
+}
