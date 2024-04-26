@@ -30,6 +30,16 @@ export function useSocket(userLocation, errorHandler) {
     };
   }, []);
 
+  const handleMyLocation = () => {
+    if (globeEl.current) {
+      try {
+        globeEl.current.pointOfView(userLocation, 10000);
+      } catch (error) {
+        console.error("Error during setting point of view:", error);
+        errorHandler.setError("Error", "Error during setting point of view", false);
+      }
+    }
+  };
   const handleJoin = () => {
     if (joined) {
       errorHandler.setError("Wait a while...", "You have already joined!", true);
@@ -51,5 +61,5 @@ export function useSocket(userLocation, errorHandler) {
     }
   };
 
-  return { places, globeEl, handleJoin };
+  return { places, globeEl, handleJoin, handleMyLocation};
 }
