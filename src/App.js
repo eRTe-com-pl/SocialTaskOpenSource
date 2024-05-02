@@ -12,20 +12,15 @@ import { useUserLocation } from "./hooks/useUserLocation.js";
 import { useSocket } from "./hooks/useSocket.js";
 import { useError } from "./hooks/useError.js";
 
-// const AUTO_ROTATE_SPEED = 0.5;
-// const POV_POSITION_TIME = 20000;
-// const LABEL_COLOR = "rgba(255, 165, 0, 0.75)";
-// const socket = io("http://localhost:3001");
-
 function App() {
   const error = useError();
   const { userLocation } = useUserLocation();
-  const { places, globeEl, handleJoin } = useSocket(userLocation, error);
+  const { places, globeEl, handleJoin, handleMyLocation } = useSocket(userLocation, error);
 
   return (
     <div className="App">
       <ErrorMessage error={error} />
-      <ControlPanel handleJoin={handleJoin} globeElement={globeEl} setError={error.setError} />
+      <ControlPanel handleJoin={handleJoin} globeElement={globeEl} setError={error.setError} handleMyLocation={handleMyLocation} />
       <GlobeComponent places={places} globeEl={globeEl} />
     </div>
   );
