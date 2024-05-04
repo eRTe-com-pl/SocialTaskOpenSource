@@ -1,4 +1,5 @@
 import React from "react";
+import "./ControlPanel.scss";
 
 const POV_POSITION_TIME = 20000;
 function ControlPanel({ handleMyLocation, handleJoin, globeElement, setError }) {
