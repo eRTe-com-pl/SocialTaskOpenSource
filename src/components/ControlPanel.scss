@@ -1,0 +1,26 @@
+.control-panel {
+  position: fixed;
+  top: 50%;
+  left: 50px;
+  transform: translate(0, -50%);
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  width: max-content;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px;
+  border-radius: 10px;
+  color: #25995C;
+  button {
+    background: #274E32;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+      background-color: #1E7E5D;
+    }
+  }
+}
