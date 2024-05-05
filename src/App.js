@@ -1,16 +1,13 @@
 import React, { useState } from "react";
-// import Globe from "react-globe.gl";
 import "./App.css";
-// import placesData from "./data/places.js";
 import arcsData from "./data/data.js";
-// import { useRef, useState, useEffect } from "react";
-// import { io } from "socket.io-client";
 import ErrorMessage from "./components/ErrorMessage.js";
 import GlobeComponent from "./components/GlobeComponent.js";
 import ControlPanel from "./components/ControlPanel.js";
 import { useUserLocation } from "./hooks/useUserLocation.js";
 import { useSocket } from "./hooks/useSocket.js";
 import { useError } from "./hooks/useError.js";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const error = useError();
