@@ -8,6 +8,7 @@ function ControlPanel({ handleMyLocation, handleJoin, globeElement, setError }) 
         <div className="control-panel">
             <h1>Control Panel</h1>
             <div class="accordion">
+                PO naciśnieciu przycisku Sekcja 1, Sekcja 2, Sekcja 3, powinna się pokazać treść na przezroczystym tle. Oraza przyciski wybierz lub anuluj. Jesli dana tresc zostanie wybrana podświetli się przycisk skojarzony z nią
 
                 <div class="accordion-block">
                     <button class="accordion-btn">Sekcja 1</button>

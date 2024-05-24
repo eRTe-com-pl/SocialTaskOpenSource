@@ -60,7 +60,9 @@
   }
 
   .accordion {
+    width: 100%;
     button {
+      width: 100%;
       background-color: $background-button-3;
       color: $text-button-3;
       @include button;
