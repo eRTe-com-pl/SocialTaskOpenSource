@@ -7,7 +7,10 @@ import ControlPanel from "./components/ControlPanel.js";
 import { useUserLocation } from "./hooks/useUserLocation.js";
 import { useSocket } from "./hooks/useSocket.js";
 import { useError } from "./hooks/useError.js";
+<<<<<<< HEAD
 import 'bootstrap/dist/css/bootstrap.min.css';
+=======
+>>>>>>> Fix-go-to-my-location_1
 
 function App() {
   const error = useError();
