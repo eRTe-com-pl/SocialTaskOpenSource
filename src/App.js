@@ -7,23 +7,30 @@ import ControlPanel from "./components/ControlPanel.js";
 import { useUserLocation } from "./hooks/useUserLocation.js";
 import { useSocket } from "./hooks/useSocket.js";
 import { useError } from "./hooks/useError.js";
-<<<<<<< HEAD
 import 'bootstrap/dist/css/bootstrap.min.css';
-=======
->>>>>>> Fix-go-to-my-location_1
+import UserNamePrompt from "./components/UserNamePrompt.js";
 
 function App() {
-  const error = useError();
-  const { userLocation } = useUserLocation();
-  const { places, globeEl, handleJoin, handleMyLocation } = useSocket(userLocation, error);
+    const [username, setUsername] = React.useState("");
+    const error = useError();
+    const {userLocation} = useUserLocation();
+    const {places, globeEl, handleJoin, handleMyLocation} = useSocket(userLocation, username, error);
 
-  return (
-    <div className="App">
-      <ErrorMessage error={error} />
-      <ControlPanel handleJoin={handleJoin} globeElement={globeEl} setError={error.setError} handleMyLocation={handleMyLocation} />
-      <GlobeComponent places={places} globeEl={globeEl} />
-    </div>
-  );
+    const handleUserNameSubmit = (name) => {
+        setUsername(name);
+        console.log("Username set:", name);
+        handleJoin(name);
+    };
+
+    return (
+        <div className="App">
+            {!username && <UserNamePrompt onSubmit={handleUserNameSubmit}/>}
+            <ErrorMessage error={error}/>
+            <ControlPanel handleJoin={handleJoin} globeElement={globeEl} setError={error.setError}
+                          handleMyLocation={handleMyLocation}/>
+            <GlobeComponent places={places} globeEl={globeEl}/>
+        </div>
+    );
 }
 
 export default App;

@@ -4,7 +4,7 @@ import placesData from "../data/places.js";
 
 const socket = io("http://localhost:3001");
 
-export function useSocket(userLocation, errorHandler) {
+export function useSocket(userLocation, username, errorHandler) {
   const globeEl = useRef();
   const [places, setPlaces] = useState(placesData);
   const [joined, setJoined] = useState(false);
@@ -40,17 +40,16 @@ export function useSocket(userLocation, errorHandler) {
       }
     }
   };
-  const handleJoin = () => {
+  const handleJoin = (username) => {
     if (joined) {
       errorHandler.setError("Wait a while...", "You have already joined!", true);
 
       return;
     }
 
-    if (userLocation) {
-      const userName = `User${Math.floor(Math.random() * 1000)}`;
+    if (userLocation && username) {
       const newPlace = {
-        name: userName,
+        name: username,
         lat: userLocation.lat,
         lng: userLocation.lng,
         size: 1,
