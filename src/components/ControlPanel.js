@@ -33,6 +33,7 @@ function ControlPanel({ handleMyLocation, handleJoin, globeElement, setError }) 
             <div className="control-panel__buttons">
                 <button onClick={handleMyLocation}>My Location</button>
                 <button onClick={handleJoin}>Join to</button>
+                <a href="https://getbootstrap.com/docs/5.3/examples/offcanvas-navbar/" target="_blank" rel="noopener noreferrer">https://getbootstrap.com/docs/5.3/examples/offcanvas-navbar/</a>
             </div>
 
         </div>
