@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
-import arcsData from "./data/data.js";
 import ErrorMessage from "./components/ErrorMessage.js";
 import GlobeComponent from "./components/GlobeComponent.js";
 import ControlPanel from "./components/ControlPanel.js";
