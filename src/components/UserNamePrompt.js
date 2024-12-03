@@ -11,8 +11,8 @@ function UserNamePrompt({ onSubmit }) {
   };
 
   return (
-    <div className="UserNamePrompt prompt ">
-      <div className="UserNamePrompt-Content text-center">
+    <div className="UserNamePrompt prompt row">
+      <div className="UserNamePrompt-Content text-center col-4 mx-auto">
         <h1>Welcome to SocialTask</h1>
         <form onSubmit={handleSubmit} className="mt-4">
           <input

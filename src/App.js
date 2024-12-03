@@ -23,7 +23,7 @@ function App() {
     };
 
     return (
-        <div className="App">
+        <div className="App container">
             {!username && <UserNamePrompt onSubmit={handleUserNameSubmit}/>}
             <ErrorMessage error={error}/>
             <ControlPanel handleJoin={handleJoin} globeElement={globeEl} setError={error.setError}
