@@ -1,17 +1,19 @@
-import React, { useRef, useEffect } from "react";
+import React, {useEffect, useRef} from "react";
 import Globe from "react-globe.gl";
 import arcsData from "../data/data.js";
+import globeImage from '../assets/img/earth-night.jpg';
+import backgroundImage from '../assets/img/night-sky.png';
 
 const AUTO_ROTATE_SPEED = 0.5;
 const POV_POSITION_TIME = 20000;
 
-function GlobeComponent({ places, globeEl }) {
+function GlobeComponent({places, globeEl}) {
     const globeRef = useRef();
 
-   useEffect(() => {
+    useEffect(() => {
         if (globeEl.current) {
             globeEl.current.controls().autoRotate = true;
-            globeEl.current .controls().autoRotateSpeed = AUTO_ROTATE_SPEED;
+            globeEl.current.controls().autoRotateSpeed = AUTO_ROTATE_SPEED;
         }
     }, []);
 
@@ -19,8 +21,8 @@ function GlobeComponent({ places, globeEl }) {
         <Globe
             // pointOfView
             ref={globeEl}
-            globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
-            backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
+            globeImageUrl={globeImage}
+            backgroundImageUrl={backgroundImage}
             // edges
             arcsData={arcsData}
             arcColor={"color"}
