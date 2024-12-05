@@ -1,9 +1,9 @@
-import React from "react";
+import React, {Fragment} from "react";
 import "./ControlPanel.scss";
 
 const POV_POSITION_TIME = 20000;
 
-function ControlPanel({handleMyLocation, handleJoin, globeElement, setError}) {
+function ControlPanel({username, handleMyLocation, handleJoin, globeElement, setError}) {
     return (<div className="control-panel">
         <h1>Control Panel</h1>
 
@@ -22,7 +22,7 @@ function ControlPanel({handleMyLocation, handleJoin, globeElement, setError}) {
                 </svg>
                 <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
                     <div className="d-flex justify-content-between">
-                        <strong className="text-gray-dark">Full Name</strong>
+                        <strong className="text-gray-dark">Full Name {username ? '@' +username : ''}</strong>
                         <button
                             type="button"
                             className="btn btn-primary btn-sm position-relative rounded-4"
@@ -36,11 +36,10 @@ function ControlPanel({handleMyLocation, handleJoin, globeElement, setError}) {
                             </span>
                         </button>
                     </div>
-                    <span className="d-block left">@username</span>
+                    <span className="d-block left">Dłuższy opis asd  </span>
                 </div>
             </div>
         </div>
     </div>);
 }
-
 export default ControlPanel;

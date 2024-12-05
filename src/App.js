@@ -41,6 +41,7 @@ function App() {
                     globeElement={globeEl}
                     setError={error.setError}
                     handleMyLocation={handleMyLocation}
+                    username={username}
                 />
             )}
             <GlobeComponent places={places} globeEl={globeEl} />
