@@ -7,11 +7,6 @@
   $background-button-3: #65D49ACC;
   $text-button-3: #1B3E2B;
 
-  // @mixin theme_green() {
-  //   // TODO implement variables for green theme
-
-  // }
-
   @mixin button() {
     padding: 5px;
     border-radius: 5px;
@@ -60,19 +55,11 @@
     }
   }
 
-  .accordion {
-    button {
-      background-color: $background-button-3;
-      color: $text-button-3;
-      @include button;
-      margin-top: -10px;
-    }
-
-    display: flex;
-    flex-direction: column;
-
-    .hidden {
-      display: none;
+  .bg-body{
+    background-color: rgba(250, 250, 250, .04) !important;
+    span, strong{
+      color: #25995C;
     }
   }
+
 }
