@@ -18,15 +18,15 @@ function App() {
 
     const handleUserNameSubmit = (username) => {
         setUsername(username);
-        setShowUserNamePrompt(false); // Ukryj prompt po ustawieniu nazwy użytkownika
+        setShowUserNamePrompt(false);
         handleJoin(username);
     };
 
     const handleJoinClick = () => {
         if (!username) {
-            setShowUserNamePrompt(true); // Pokaż prompt, jeśli username jest pusty
+            setShowUserNamePrompt(true);
         } else {
-            handleJoin(username); // Jeśli username jest ustawiony, dołącz
+            handleJoin(username);
         }
     };
 
