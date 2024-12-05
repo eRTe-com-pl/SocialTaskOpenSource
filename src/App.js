@@ -11,23 +11,39 @@ import UserNamePrompt from "./components/UserNamePrompt.js";
 
 function App() {
     const [username, setUsername] = React.useState("");
+    const [showUserNamePrompt, setShowUserNamePrompt] = React.useState(false);
     const error = useError();
-    const {userLocation} = useUserLocation();
-    const {places, globeEl, handleJoin, handleMyLocation} = useSocket(userLocation, username, error);
+    const { userLocation } = useUserLocation();
+    const { places, globeEl, handleJoin, handleMyLocation } = useSocket(userLocation, username, error);
 
-    const handleUserNameSubmit = (name) => {
-        setUsername(name);
-        console.log("Username set:", name);
-        handleJoin(name);
+    const handleUserNameSubmit = (username) => {
+        setUsername(username);
+        setShowUserNamePrompt(false); // Ukryj prompt po ustawieniu nazwy użytkownika
+        handleJoin(username);
+    };
+
+    const handleJoinClick = () => {
+        if (!username) {
+            setShowUserNamePrompt(true); // Pokaż prompt, jeśli username jest pusty
+        } else {
+            handleJoin(username); // Jeśli username jest ustawiony, dołącz
+        }
     };
 
     return (
         <div className="App container">
-            {!username && <UserNamePrompt onSubmit={handleUserNameSubmit}/>}
-            <ErrorMessage error={error}/>
-            <ControlPanel handleJoin={handleJoin} globeElement={globeEl} setError={error.setError}
-                          handleMyLocation={handleMyLocation}/>
-            <GlobeComponent places={places} globeEl={globeEl}/>
+            <ErrorMessage error={error} />
+            {showUserNamePrompt ? (
+                <UserNamePrompt onSubmit={handleUserNameSubmit} />
+            ) : (
+                <ControlPanel
+                    handleJoin={handleJoinClick}
+                    globeElement={globeEl}
+                    setError={error.setError}
+                    handleMyLocation={handleMyLocation}
+                />
+            )}
+            <GlobeComponent places={places} globeEl={globeEl} />
         </div>
     );
 }
