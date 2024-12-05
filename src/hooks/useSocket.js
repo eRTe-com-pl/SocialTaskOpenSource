@@ -46,7 +46,6 @@ export function useSocket(userLocation, username, errorHandler) {
 
             return;
         }
-        username = "asd";
         if (userLocation && username) {
             console.log("User location:", userLocation);
             console.log("Username:", username);

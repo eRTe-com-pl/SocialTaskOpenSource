@@ -9,7 +9,6 @@ function ControlPanel({handleMyLocation, handleJoin, globeElement, setError}) {
 
         <div className="control-panel__buttons">
             <button onClick={handleMyLocation}>My Location</button>
-            <button onClick={handleJoin}>Join to</button>
         </div>
 
         <div className="my-3 p-3 bg-body rounded shadow-sm">
