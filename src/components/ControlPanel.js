@@ -30,46 +30,14 @@ function ControlPanel({handleMyLocation, handleJoin, globeElement, setError}) {
                         >
                             Join
                             <span
-                                className="position-absolute top-0 start-100 translate-middlsse badge rounded-pill bg-danger">
+                                className="position-absolute bottom-500 start-90 translate-middlsse badge rounded-pill bg-danger">
                                 99
                                 <span className="visually-hidden">unread messages</span>
-                              </span>
+                            </span>
                         </button>
                     </div>
                     <span className="d-block left">@username</span>
                 </div>
-            </div>
-            <div className="d-flex text-body-secondary pt-3">
-                <svg className="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
-                     xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
-                     preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#007bff"></rect>
-                    <text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
-                </svg>
-                <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
-                    <div className="d-flex justify-content-between">
-                        <strong className="text-gray-dark">Full Name</strong>
-                        <a href="#">Follow</a>
-                    </div>
-                    <span className="d-block left">@username</span>
-                </div>
-            </div>
-            <div className="d-flex text-body-secondary pt-3">
-                <svg className="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
-                     xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
-                     preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#007bff"></rect>
-                    <text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
-                </svg>
-                <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
-                    <div className="d-flex justify-content-between">
-                        <strong className="text-gray-dark">Full Name</strong>
-                        <a href="#">Follow</a>
-                    </div>
-                    <span className="d-block left">@username</span>
-                </div>
-            </div>
-            <div className="d-flex text-body-secondary pt-3">
             </div>
         </div>
     </div>);
