@@ -33,7 +33,7 @@ export function useSocket(userLocation, username, errorHandler) {
     const handleMyLocation = () => {
         if (globeEl.current) {
             try {
-                globeEl.current.pointOfView(userLocation, 10000);
+                globeEl.current.pointOfView(userLocation, 4000);
             } catch (error) {
                 console.error("Error during setting point of view:", error);
                 errorHandler.setError("Error", "Error during setting point of view", false);
@@ -60,6 +60,7 @@ export function useSocket(userLocation, username, errorHandler) {
             setPlaces([...places, newPlace]);
             setJoined(true);
             socket.emit("newPlace", newPlace);
+            handleMyLocation();
         }
     };
 
