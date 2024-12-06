@@ -5,10 +5,10 @@ const POV_POSITION_TIME = 20000;
 
 function ControlPanel({username, handleMyLocation, handleJoin, globeElement, setError}) {
     return (<div className="control-panel">
-        <h1>Control Panel</h1>
+        <h1>Rozpal Świat</h1>
 
         <div className="control-panel__buttons">
-            <button onClick={handleMyLocation}>My Location</button>
+            <button onClick={handleMyLocation}>Pokaż mnie</button>
         </div>
 
         <div className="my-3 p-3 bg-body rounded shadow-sm">
@@ -22,24 +22,28 @@ function ControlPanel({username, handleMyLocation, handleJoin, globeElement, set
                 </svg>
                 <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
                     <div className="d-flex justify-content-between">
-                        <strong className="text-gray-dark">Full Name {username ? '@' +username : ''}</strong>
-                        <button
-                            type="button"
-                            className="btn btn-primary btn-sm position-relative rounded-4"
-                            onClick={handleJoin}
-                        >
-                            Join
-                            <span
-                                className="position-absolute bottom-500 start-90 translate-middlsse badge rounded-pill bg-danger">
-                                99
-                                <span className="visually-hidden">unread messages</span>
-                            </span>
-                        </button>
+                        <strong className="text-gray-dark"> {username ? '@' + username : 'Zmów modlitwę'}</strong>
+                        {username ? (<i className="bi bi-star-fill"></i>) : (
+
+                            <button
+                                type="button"
+                                className="btn btn-primary btn-sm position-relative rounded-4"
+                                onClick={handleJoin}
+                            >
+                                Dołączam..
+                                {/*<span*/}
+                                {/*    className="position-absolute bottom-500 start-90 translate-middlsse badge rounded-pill bg-danger">*/}
+                                {/*    99*/}
+                                {/*    <span className="visually-hidden">unread messages</span>*/}
+                                {/*</span>*/}
+                            </button>
+                        )}
                     </div>
-                    <span className="d-block left">Dłuższy opis asd  </span>
+                    <span className="d-block left">{ username ? ('Odmawiam') : ('Odmów')} modlitę "Zdrowaś Maryjo" w intencji pokoju na świecie.</span>
                 </div>
             </div>
         </div>
     </div>);
 }
+
 export default ControlPanel;
