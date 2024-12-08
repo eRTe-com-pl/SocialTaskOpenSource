@@ -1,0 +1,67 @@
+// pages/_app.js
+
+import '../src/index.css'; // Adjust the path as necessary
+import "../src/components/ControlPanel.scss";
+
+import React, {useEffect} from "react";
+import dynamic from 'next/dynamic';
+import ErrorMessage from "../src/components/ErrorMessage.js";
+
+const GlobeComponent = dynamic(() => import('../src/components/GlobeComponent'), { ssr: false });
+
+import ControlPanel from "../src/components/ControlPanel.js";
+import { useUserLocation } from "../src/hooks/useUserLocation.js";
+import { useSocket } from "../src/hooks/useSocket.js";
+import { useError } from "../src/hooks/useError.js";
+import UserNamePrompt from "../src/components/UserNamePrompt.js";
+
+function App() {
+    const [username, setUsername] = React.useState("");
+    const [showUserNamePrompt, setShowUserNamePrompt] = React.useState(false);
+    const error = useError();
+    const { userLocation } = useUserLocation();
+    const { places, globeEl, handleJoin, handleMyLocation } = useSocket(userLocation, username, error);
+
+    useEffect(() => {
+        if (globeEl.current) {
+            // Validate if `controls` is supposed to be a function
+            if (typeof globeEl.current.controls !== 'function') {
+                console.warn('Expected controls to be a function, achievable only if globeEl references a specific DOM element type');
+            }
+        }
+    }, [globeEl]);
+
+    const handleUserNameSubmit = (username) => {
+        setUsername(username);
+        setShowUserNamePrompt(false);
+        handleJoin(username);
+    };
+
+    const handleJoinClick = () => {
+        if (!username) {
+            setShowUserNamePrompt(true);
+        } else {
+            handleJoin(username);
+        }
+    };
+
+    return (
+        <div className="App container">
+            <ErrorMessage error={error} />
+            {showUserNamePrompt ? (
+                <UserNamePrompt onSubmit={handleUserNameSubmit} />
+            ) : (
+                <ControlPanel
+                    handleJoin={handleJoinClick}
+                    globeElement={globeEl}
+                    setError={error.setError}
+                    handleMyLocation={handleMyLocation}
+                    username={username}
+                />
+            )}
+            <GlobeComponent places={places} globeEl={globeEl} />
+        </div>
+    );
+}
+
+export default App;

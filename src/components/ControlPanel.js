@@ -1,5 +1,4 @@
-import React, {Fragment} from "react";
-import "./ControlPanel.scss";
+import React from "react";
 
 const POV_POSITION_TIME = 20000;
 
@@ -39,7 +38,7 @@ function ControlPanel({username, handleMyLocation, handleJoin, globeElement, set
                             </button>
                         )}
                     </div>
-                    <span className="d-block left">{ username ? ('Odmawiam') : ('Odmów')} modlitę "Zdrowaś Maryjo" w intencji pokoju na świecie.</span>
+                    <span className="d-block left">{ username ? ('Odmawiam') : ('Odmów')} modlitę <strong>Zdrowaś Maryjo</strong> w intencji pokoju na świecie.</span>
                 </div>
             </div>
         </div>
