@@ -21,11 +21,11 @@ function ControlPanel({username, handleMyLocation, handleJoin, globeElement, set
                 </svg>
                 <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
                     <div className="d-flex justify-content-between">
-                        <strong className="text-gray-dark"> {username ? '@' + username : 'Zmów modlitwę'}</strong>
+                        <strong className="text-gray-dark"> {username ? '@' + username : 'Dołącz'}</strong>
                         {username ? (<i className="bi bi-star-fill"></i>) : (
 
                             <button
-                                type="button"
+                                type="button" 
                                 className="btn btn-primary btn-sm position-relative rounded-4"
                                 onClick={handleJoin}
                             >
@@ -38,11 +38,11 @@ function ControlPanel({username, handleMyLocation, handleJoin, globeElement, set
                             </button>
                         )}
                     </div>
-                    <span className="d-block left">{ username ? ('Odmawiam') : ('Odmów')} modlitę <strong>Zdrowaś Maryjo</strong> w intencji pokoju na świecie.</span>
+                    <span className="d-block left">{ username ? ('Dołączyłem') : ('Dołącz')} do <strong>Społeczności</strong> GlobeHerees.</span>
                 </div>
             </div>
         </div>
     </div>);
-}
+}ą
 
 export default ControlPanel;
