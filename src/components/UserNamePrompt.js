@@ -11,19 +11,19 @@ function UserNamePrompt({ onSubmit }) {
   };
 
   return (
-    <div className="UserNamePrompt">
-      <div className="UserNamePrompt-Content">
+    <div className="UserNamePrompt prompt row">
+      <div className="UserNamePrompt-Content text-center col-4 mx-auto">
         <h1>Welcome to SocialTask</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="mt-4">
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Enter your username"
-            className="UserNameInput"
+            className="form-control UserNameInput"
             required
           />
-          <button type="submit" className="Button Primary">
+          <button type="submit" className="btn btn-primary mt-2">
             Start
           </button>
         </form>
