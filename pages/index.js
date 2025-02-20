@@ -1,28 +1,50 @@
-// pages/index.js
-
 import React from 'react';
 import dynamic from 'next/dynamic';
-
-// Directly use components or logic as needed, similar to how they're used in `App`.
-// If any part of `App` is essential, move that logic into reusable components or hooks
-// that can be consumed in both places.
-
-const DynamicGlobeComponent = dynamic(() => import('../src/components/GlobeComponent'), { ssr: false });
 import ControlPanel from "../src/components/ControlPanel.js";
 import ErrorMessage from "../src/components/ErrorMessage.js";
 import UserNamePrompt from "../src/components/UserNamePrompt.js";
+import { useUserLocation } from '../src/hooks/useUserLocation';
+import { useSocket } from '../src/hooks/useSocket';
+
+const DynamicGlobeComponent = dynamic(() => import('../src/components/GlobeComponent'), { ssr: false });
 
 function HomePage() {
-    // Use hooks and state similar to `_app.js` if necessary.
-    // Example: const [username, setUsername] = React.useState("");
+    const [errorState, setErrorState] = React.useState({
+        title: '',
+        error: null,
+        disableRefresh: false
+    });
+    const [username, setUsername] = React.useState('');
+    const { userLocation, errorMessage } = useUserLocation();
+    
+    const errorHandler = {
+        setError: (title, message, disableRefresh) => {
+            setErrorState({ title, error: message, disableRefresh });
+        }
+    };
 
-    // Similarly replicate any logic needed from `App`.
+    const { places, globeEl, handleJoin, handleMyLocation } = useSocket(
+        userLocation,
+        username,
+        errorHandler
+    );
+
     return (
-        <div>
-            {/* Insert the page-specific content here */}
-            {/* <DynamicGlobeComponent /> */}
-            {/* Use the components like ControlPanel, ErrorMessage, UserNamePrompt as needed */}
-        </div>
+        <main>
+           <ErrorMessage error={errorState} />
+           <UserNamePrompt setError={errorHandler.setError} setUsername={setUsername} />
+           <ControlPanel 
+             username={username}
+             handleMyLocation={handleMyLocation}
+             handleJoin={() => handleJoin(username)}
+             globeElement={globeEl.current}
+             setError={errorHandler.setError}
+           />
+           <DynamicGlobeComponent 
+             places={places} 
+             globeEl={globeEl}
+           />
+        </main>
     );
 }
 

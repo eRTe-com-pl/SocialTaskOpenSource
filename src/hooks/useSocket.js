@@ -31,9 +31,14 @@ export function useSocket(userLocation, username, errorHandler) {
     }, []);
 
     const handleMyLocation = () => {
-        if (globeEl.current) {
+        if (globeEl.current && userLocation) {
             try {
-                globeEl.current.pointOfView(userLocation, 4000);
+                const { lat, lng } = userLocation;
+                globeEl.current.pointOfView({
+                    lat,
+                    lng,
+                    altitude: 2.5
+                }, 2000);
             } catch (error) {
                 console.error("Error during setting point of view:", error);
                 errorHandler.setError("Error", "Error during setting point of view", false);

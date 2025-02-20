@@ -4,8 +4,8 @@ import dynamic from 'next/dynamic';
 
 // import Globe from "react-globe.gl";
 import arcsData from "../data/data.js";
-import globeImage from '../assets/img/earth-night.jpg';
-import backgroundImage from '../assets/img/night-sky.png';
+const globeImage = '/assets/img/earth-night.jpg';
+const backgroundImage = '/assets/img/night-sky.png';
 
 const Globe = dynamic(() => import('react-globe.gl'), { ssr: false });
 const AUTO_ROTATE_SPEED = 0.5;

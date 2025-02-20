@@ -43,6 +43,6 @@ function ControlPanel({username, handleMyLocation, handleJoin, globeElement, set
             </div>
         </div>
     </div>);
-}ą
+}
 
 export default ControlPanel;

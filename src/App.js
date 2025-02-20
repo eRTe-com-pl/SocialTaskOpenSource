@@ -1,33 +1,42 @@
-// import React from "react";
+// // pages/_app.js
+
+// import '../src/index.css'; // Adjust the path as necessary
+// import "../src/components/ControlPanel.scss";
+
+// import React, {useEffect} from "react";
 // import dynamic from 'next/dynamic';
-// // import "./App.css";
-// import ErrorMessage from "./components/ErrorMessage.js";
-// // import GlobeComponent from "./components/GlobeComponent.js";
-//
-// const GlobeComponent = dynamic(() => import('./components/GlobeComponent'), { ssr: false });
-//
-// import ControlPanel from "./components/ControlPanel.js";
-// import { useUserLocation } from "./hooks/useUserLocation.js";
-// import { useSocket } from "./hooks/useSocket.js";
-// import { useError } from "./hooks/useError.js";
-// // import 'bootstrap/dist/css/bootstrap.min.css';
-// import UserNamePrompt from "./components/UserNamePrompt.js";
-//
-//
-//
+// import ErrorMessage from "../src/components/ErrorMessage.js";
+
+// const GlobeComponent = dynamic(() => import('../src/components/GlobeComponent'), { ssr: false });
+
+// import ControlPanel from "../src/components/ControlPanel.js";
+// import { useUserLocation } from "../src/hooks/useUserLocation.js";
+// import { useSocket } from "../src/hooks/useSocket.js";
+// import { useError } from "../src/hooks/useError.js";
+// import UserNamePrompt from "../src/components/UserNamePrompt.js";
+
 // function App() {
 //     const [username, setUsername] = React.useState("");
 //     const [showUserNamePrompt, setShowUserNamePrompt] = React.useState(false);
 //     const error = useError();
 //     const { userLocation } = useUserLocation();
 //     const { places, globeEl, handleJoin, handleMyLocation } = useSocket(userLocation, username, error);
-//
+
+//     useEffect(() => {
+//         if (globeEl.current) {
+//             // Validate if `controls` is supposed to be a function
+//             if (typeof globeEl.current.controls !== 'function') {
+//                 console.warn('Expected controls to be a function, achievable only if globeEl references a specific DOM element type');
+//             }
+//         }
+//     }, [globeEl]);
+
 //     const handleUserNameSubmit = (username) => {
 //         setUsername(username);
 //         setShowUserNamePrompt(false);
 //         handleJoin(username);
 //     };
-//
+
 //     const handleJoinClick = () => {
 //         if (!username) {
 //             setShowUserNamePrompt(true);
@@ -35,7 +44,7 @@
 //             handleJoin(username);
 //         }
 //     };
-//
+
 //     return (
 //         <div className="App container">
 //             <ErrorMessage error={error} />
@@ -54,5 +63,5 @@
 //         </div>
 //     );
 // }
-//
+
 // export default App;
